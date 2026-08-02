@@ -136,7 +136,7 @@ func (p *Parser) parseIfExpression() ast.Expression {
 
 func (p *Parser) parseFunctionLiteral() ast.Expression {
 	lit := &ast.FunctionLiteral{Token: p.curToken}
-	if !p.expectPeek(token.LBRACE) {
+	if !p.expectPeek(token.LPAREN) {
 		return nil
 	}
 
