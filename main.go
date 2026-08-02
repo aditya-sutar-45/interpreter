@@ -9,11 +9,17 @@ import (
 )
 
 func main() {
+	art, err := os.ReadFile("./banana.txt")
+	if err != nil {
+		panic(err)
+	}
+
 	user, err := user.Current()
 	if err != nil {
 		panic(err)
 	}
 
+	fmt.Println(string(art))
 	fmt.Printf("Hello %s!\n", user.Username)
 	fmt.Println("Type any command!")
 
