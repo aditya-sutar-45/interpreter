@@ -43,3 +43,10 @@ type ReturnValue struct {
 
 func (rv *ReturnValue) Type() ObjectType { return ReturnValueOBJ }
 func (rv *ReturnValue) Inspect() string  { return rv.Value.Inspect() }
+
+type Error struct {
+	Message string
+}
+
+func (e *Error) Type() ObjectType { return ErrorOBJ }
+func (e *Error) Inspect() string  { return "ERROR: " + e.Message }
