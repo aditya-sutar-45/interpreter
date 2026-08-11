@@ -62,7 +62,7 @@ func evalBlockStatement(block *ast.BlockStatement) object.Object {
 	for _, stmt := range block.Statements {
 		result = Eval(stmt)
 
-		if result != nil && result.Type() == object.RETURN_VALUE_OBJ {
+		if result != nil && result.Type() == object.ReturnValueOBJ {
 			return result
 		}
 	}
@@ -142,7 +142,7 @@ func evalBangOperatorExpression(right object.Object) object.Object {
 }
 
 func evalMinusPrefixOperatorExpression(right object.Object) object.Object {
-	if right.Type() != object.INTEGER_OBJ {
+	if right.Type() != object.IntegerOBJ {
 		return NULL
 	}
 
@@ -155,7 +155,7 @@ func evalInfixExpression(
 	left, right object.Object,
 ) object.Object {
 	switch {
-	case left.Type() == object.INTEGER_OBJ && right.Type() == object.INTEGER_OBJ:
+	case left.Type() == object.IntegerOBJ && right.Type() == object.IntegerOBJ:
 		return evalIntegerInfixExpression(operator, left, right)
 	case operator == "==":
 		return nativeBoolToBooleanObject(left == right)
