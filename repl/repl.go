@@ -6,7 +6,9 @@ import (
 	"fmt"
 	"io"
 
+	"github.com/aditya-sutar-45/interpreter/eval"
 	"github.com/aditya-sutar-45/interpreter/lexer"
+	"github.com/aditya-sutar-45/interpreter/object"
 	"github.com/aditya-sutar-45/interpreter/parser"
 )
 
@@ -14,6 +16,7 @@ const PROMPT = ">>>> "
 
 func Start(in io.Reader, out io.Writer) {
 	scanner := bufio.NewScanner(in)
+	env := object.NewEnvironment()
 
 	for {
 		fmt.Print(PROMPT)
@@ -32,8 +35,11 @@ func Start(in io.Reader, out io.Writer) {
 			continue
 		}
 
-		io.WriteString(out, program.String())
-		io.WriteString(out, "\n")
+		evaluated := eval.Eval(program, env)
+		if evaluated != nil {
+			io.WriteString(out, evaluated.Inspect())
+			io.WriteString(out, "\n")
+		}
 	}
 }
 
