@@ -177,6 +177,27 @@ func TestIntegerLiteralExpression(t *testing.T) {
 	}
 }
 
+func TestStringLiteralExpression(t *testing.T) {
+	input := `"hello my name is aditya sutar"`
+	expected := "hello my name is aditya sutar"
+
+	l := lexer.New(input)
+	p := New(l)
+
+	program := p.ParseProgram()
+	checkParseErrors(t, p)
+
+	smt := program.Statements[0].(*ast.ExpressionStatement)
+	literal, ok := smt.Expression.(*ast.StringLiteral)
+	if !ok {
+		t.Fatalf("exp not *ast.StringLiteral, got = %T", smt.Expression)
+	}
+
+	if literal.Value != expected {
+		t.Errorf("literal.Value not %q, got = %q", expected, literal.Value)
+	}
+}
+
 func TestBooleanExpression(t *testing.T) {
 	input := "true;"
 
