@@ -234,13 +234,14 @@ func (p *Parser) parseStatement() ast.Statement {
 func (p *Parser) parseLetStatement() *ast.LetStatement {
 	stmt := &ast.LetStatement{Token: p.curToken}
 
-	// let <identifier> = <expression>
-
-	// we want an identifier as our next token
 	if !p.expectPeek(token.IDENT) {
 		return nil
 	}
-	stmt.Name = &ast.Identifier{Token: p.curToken, Value: p.curToken.Literal}
+
+	stmt.Name = &ast.Identifier{
+		Token: p.curToken,
+		Value: p.curToken.Literal,
+	}
 
 	if !p.expectPeek(token.ASSIGN) {
 		return nil
@@ -250,8 +251,8 @@ func (p *Parser) parseLetStatement() *ast.LetStatement {
 
 	stmt.Value = p.parseExpression(LOWEST)
 
-	for !p.curTokenIs(token.SEMICOLON) {
-		p.nextToken()
+	if !p.expectPeek(token.SEMICOLON) {
+		return nil
 	}
 
 	return stmt
