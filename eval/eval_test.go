@@ -68,6 +68,21 @@ func TestEvalBooleanExpression(t *testing.T) {
 	}
 }
 
+func TestStringLiteral(t *testing.T) {
+	input := `"hello i am aditya sutar"`
+	expected := "hello i am aditya sutar"
+
+	evaluated := testEval(input)
+	str, ok := evaluated.(*object.String)
+	if !ok {
+		t.Fatalf("object is not String. got=%T (%+v)", evaluated, evaluated)
+	}
+
+	if str.Value != expected {
+		t.Errorf("String has wrong value. got=%q", str.Value)
+	}
+}
+
 func TestIfElseExpressions(t *testing.T) {
 	tests := []struct {
 		input    string

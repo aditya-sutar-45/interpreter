@@ -18,6 +18,7 @@ const (
 	ReturnValueOBJ = "RETURN_VALUE"
 	ErrorOBJ       = "ERROR"
 	FunctionObj    = "FUNCTION"
+	StringOBJ      = "STRING"
 )
 
 type Object interface {
@@ -82,3 +83,10 @@ func (f *Function) Inspect() string {
 
 	return out.String()
 }
+
+type String struct {
+	Value string
+}
+
+func (s *String) Type() ObjectType { return StringOBJ }
+func (s *String) Inspect() string  { return s.Value }
