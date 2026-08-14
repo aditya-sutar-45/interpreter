@@ -9,7 +9,10 @@ import (
 	"github.com/aditya-sutar-45/interpreter/ast"
 )
 
-type ObjectType string
+type (
+	ObjectType      string
+	BuiltinFunction func(args ...Object) Object
+)
 
 const (
 	IntegerOBJ     = "INTEGER"
@@ -19,6 +22,7 @@ const (
 	ErrorOBJ       = "ERROR"
 	FunctionObj    = "FUNCTION"
 	StringOBJ      = "STRING"
+	BuiltinOBJ     = "BUILTIN"
 )
 
 type Object interface {
@@ -90,3 +94,10 @@ type String struct {
 
 func (s *String) Type() ObjectType { return StringOBJ }
 func (s *String) Inspect() string  { return s.Value }
+
+type Builtin struct {
+	Fn BuiltinFunction
+}
+
+func (b *Builtin) Type() ObjectType { return BuiltinOBJ }
+func (b *Builtin) Inspect() string  { return "builtin funciton" }
