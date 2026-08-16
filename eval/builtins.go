@@ -13,6 +13,15 @@ var builtins = map[string]*object.Builtin{
 	"pop":  {Fn: builtinPop},
 }
 
+// builtinLen returns the number of elements in an array or the number of
+// characters in a string.
+//
+// Examples:
+//
+//	len("hello")       -> 5
+//	len([1, 2, 3])     -> 3
+//
+// Returns an error if the argument is not a string or array.
 func builtinLen(args ...object.Object) object.Object {
 	if len(args) != 1 {
 		return newError("wrong number of arguments. got=%d, want=1", len(args))
@@ -29,6 +38,15 @@ func builtinLen(args ...object.Object) object.Object {
 	}
 }
 
+// builtinHead returns the first element of an array.
+//
+// Examples:
+//
+//	head([1, 2, 3]) -> 1
+//	head([5])       -> 5
+//	head([])        -> NULL
+//
+// Does not modify the original array.
 func builtinHead(args ...object.Object) object.Object {
 	if len(args) != 1 {
 		return newError("wrong number of arguments. got=%d, want=1", len(args))
@@ -46,6 +64,15 @@ func builtinHead(args ...object.Object) object.Object {
 	return NULL
 }
 
+// builtinTail returns the last element of an array.
+//
+// Examples:
+//
+//	tail([1, 2, 3]) -> 3
+//	tail([5])       -> 5
+//	tail([])        -> NULL
+//
+// Does not modify the original array.
 func builtinTail(args ...object.Object) object.Object {
 	if len(args) != 1 {
 		return newError("wrong number of arguments. got=%d, want=1", len(args))
@@ -63,6 +90,16 @@ func builtinTail(args ...object.Object) object.Object {
 	return NULL
 }
 
+// builtinRest returns a new array containing every element except the first.
+//
+// Examples:
+//
+//	rest([1, 2, 3]) -> [2, 3]
+//	rest([1, 2])    -> [2]
+//	rest([1])       -> []
+//	rest([])        -> NULL
+//
+// Does not modify the original array.
 func builtinRest(args ...object.Object) object.Object {
 	if len(args) != 1 {
 		return newError("wrong number of arguments. got=%d, want=1", len(args))
@@ -84,6 +121,14 @@ func builtinRest(args ...object.Object) object.Object {
 	return NULL
 }
 
+// builtinPush returns a new array with the given element appended.
+//
+// Examples:
+//
+//	push([1, 2, 3], 4) -> [1, 2, 3, 4]
+//	push([], 1)        -> [1]
+//
+// The original array is not modified.
 func builtinPush(args ...object.Object) object.Object {
 	if len(args) != 2 {
 		return newError("wrong number of arguments. got=%d, want=2", len(args))
@@ -103,6 +148,15 @@ func builtinPush(args ...object.Object) object.Object {
 	return &object.Array{Elements: newArr}
 }
 
+// builtinPop returns a new array with the last element removed.
+//
+// Examples:
+//
+//	pop([1, 2, 3]) -> [1, 2]
+//	pop([1])       -> []
+//	pop([])        -> NULL
+//
+// The original array is not modified.
 func builtinPop(args ...object.Object) object.Object {
 	if len(args) != 1 {
 		return newError("wrong number of arguments. got=%d, want=1", len(args))
