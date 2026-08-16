@@ -30,6 +30,7 @@ if (5 < 10) {
 "aditya"
 "aditya_sutar"
 [1, 2];
+{"hello" : "world"}
 `
 
 	tests := []struct {
@@ -137,6 +138,13 @@ if (5 < 10) {
 		{token.INT, "2"},
 		{token.RBRACKET, "]"},
 		{token.SEMICOLON, ";"},
+
+		{token.LBRACE, "{"},
+		{token.STRING, "hello"},
+		{token.COLON, ":"},
+		{token.STRING, "world"},
+		{token.RBRACE, "}"},
+		{token.EOF, ""},
 
 		{token.EOF, ""},
 	}

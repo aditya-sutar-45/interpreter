@@ -21,6 +21,7 @@ const (
 	GT       = ">"
 	EQ       = "=="
 	NOT_EQ   = "!="
+
 	// Delimiters
 	COMMA     = ","
 	SEMICOLON = ";"
@@ -30,6 +31,7 @@ const (
 	RBRACE    = "}"
 	LBRACKET  = "["
 	RBRACKET  = "]"
+	COLON     = ":"
 
 	// Keywords
 	FUNCTION = "FUNCTION"
