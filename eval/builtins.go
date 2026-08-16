@@ -10,6 +10,7 @@ var builtins = map[string]*object.Builtin{
 	"tail": {Fn: builtinTail},
 	"rest": {Fn: builtinRest},
 	"push": {Fn: builtinPush},
+	"pop":  {Fn: builtinPop},
 }
 
 func builtinLen(args ...object.Object) object.Object {
@@ -100,4 +101,25 @@ func builtinPush(args ...object.Object) object.Object {
 	newArr[size] = args[1]
 
 	return &object.Array{Elements: newArr}
+}
+
+func builtinPop(args ...object.Object) object.Object {
+	if len(args) != 1 {
+		return newError("wrong number of arguments. got=%d, want=1", len(args))
+	}
+
+	if args[0].Type() != object.ArrayOBJ {
+		return newError("argument to `pop` must be %s, got %s", object.ArrayOBJ, args[0].Type())
+	}
+
+	arr := args[0].(*object.Array)
+	size := len(arr.Elements)
+	if size > 0 {
+		newArr := make([]object.Object, size-1)
+		copy(newArr, arr.Elements[0:size-1])
+
+		return &object.Array{Elements: newArr}
+	}
+
+	return NULL
 }
