@@ -1,16 +1,21 @@
 package eval
 
-import "github.com/aditya-sutar-45/interpreter/object"
+import (
+	"fmt"
+
+	"github.com/aditya-sutar-45/interpreter/object"
+)
 
 // len()
 
 var builtins = map[string]*object.Builtin{
-	"len":  {Fn: builtinLen},
-	"head": {Fn: builtinHead},
-	"tail": {Fn: builtinTail},
-	"rest": {Fn: builtinRest},
-	"push": {Fn: builtinPush},
-	"pop":  {Fn: builtinPop},
+	"len":   {Fn: builtinLen},
+	"head":  {Fn: builtinHead},
+	"tail":  {Fn: builtinTail},
+	"rest":  {Fn: builtinRest},
+	"push":  {Fn: builtinPush},
+	"pop":   {Fn: builtinPop},
+	"print": {Fn: builtinPrint},
 }
 
 // builtinLen returns the number of elements in an array or the number of
@@ -173,6 +178,15 @@ func builtinPop(args ...object.Object) object.Object {
 		copy(newArr, arr.Elements[0:size-1])
 
 		return &object.Array{Elements: newArr}
+	}
+
+	return NULL
+}
+
+// builtinPrint prints the string representation of each argument to the console.
+func builtinPrint(args ...object.Object) object.Object {
+	for _, arg := range args {
+		fmt.Println(arg.Inspect())
 	}
 
 	return NULL
