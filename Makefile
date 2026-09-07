@@ -1,13 +1,15 @@
 # Interpreter Makefile
 
-BINARY_NAME := interpreter
-CMD_PATH    := ./cmd/interpreter
-BUILD_DIR   := ./bin
+BINARY_NAME        := interpreter
+SERVER_BINARY_NAME := server
+CMD_PATH           := ./cmd/interpreter
+SERVER_CMD_PATH    := ./cmd/server
+BUILD_DIR          := ./bin
 
-.PHONY: all build run test clean fmt vet
+.PHONY: all build build-server run run-server test clean fmt vet
 
-## all: build the binary (default target)
-all: build
+## all: build both binaries (default target)
+all: build build-server
 
 ## build: compile the interpreter binary into bin/
 build:
@@ -15,9 +17,19 @@ build:
 	go build -o $(BUILD_DIR)/$(BINARY_NAME) $(CMD_PATH)
 	@echo "Built $(BUILD_DIR)/$(BINARY_NAME)"
 
+## build-server: compile the server binary into bin/
+build-server:
+	@mkdir -p $(BUILD_DIR)
+	go build -o $(BUILD_DIR)/$(SERVER_BINARY_NAME) $(SERVER_CMD_PATH)
+	@echo "Built $(BUILD_DIR)/$(SERVER_BINARY_NAME)"
+
 ## run: build and run the interpreter
 run: build
 	$(BUILD_DIR)/$(BINARY_NAME)
+
+## run-server: build and run the server
+run-server: build-server
+	$(BUILD_DIR)/$(SERVER_BINARY_NAME)
 
 ## test: run all tests
 test:
