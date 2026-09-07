@@ -3,16 +3,23 @@ package eval
 
 import (
 	"fmt"
+	"io"
+	"os"
 
 	"github.com/aditya-sutar-45/interpreter/ast"
 	"github.com/aditya-sutar-45/interpreter/object"
 )
+
+// Stdout is the writer used by builtin functions like print.
+// Defaults to os.Stdout. Override this to capture output.
+var Stdout io.Writer = os.Stdout
 
 var (
 	NULL  = &object.Null{}
 	TRUE  = &object.Boolean{Value: true}
 	FALSE = &object.Boolean{Value: false}
 )
+
 
 func Eval(node ast.Node, env *object.Environment) object.Object {
 	switch node := node.(type) {

@@ -186,8 +186,9 @@ func builtinPop(args ...object.Object) object.Object {
 // builtinPrint prints the string representation of each argument to the console.
 func builtinPrint(args ...object.Object) object.Object {
 	for _, arg := range args {
-		fmt.Println(arg.Inspect())
+		fmt.Fprintln(Stdout, arg.Inspect())
 	}
 
 	return NULL
 }
+
