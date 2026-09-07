@@ -3,6 +3,7 @@ import Editor from "@monaco-editor/react"
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/ui/resizable'
 import Output from '@/components/code_editor/Output'
 import { useState } from 'react'
+import { runCode, type RunCodeResponse } from '@/lib/api'
 
 
 export const Route = createFileRoute('/code')({
@@ -11,9 +12,16 @@ export const Route = createFileRoute('/code')({
 
 function RouteComponent() {
   const [code, setCode] = useState("// write your code here")
+  const [output, setOutput] = useState<RunCodeResponse>({ output: '' })
 
-  const runCode = async () => {
-    console.log(code)
+  const handleCodeSubmit = async () => {
+    try {
+      const output = await runCode(code)
+      setOutput(output)
+      console.log(output)
+    } catch (err) {
+      console.error('Error running code:', err)
+    }
   }
 
   return (
@@ -23,7 +31,6 @@ function RouteComponent() {
           <Editor
             height="85vh"
             width="100%"
-            defaultLanguage="javascript"
             value={code}
             onChange={c => setCode(c || '')}
             theme='vs-dark'
@@ -31,7 +38,7 @@ function RouteComponent() {
         </ResizablePanel>
         <ResizableHandle withHandle />
         <ResizablePanel defaultSize="40%">
-          <Output runCode={runCode} />
+          <Output handleCodeSubmit={handleCodeSubmit} output={output} />
         </ResizablePanel>
       </ResizablePanelGroup>
     </div>
