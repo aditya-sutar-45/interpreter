@@ -23,6 +23,8 @@ A fully functional interpreter built **from scratch** in Go — no third-party d
 | **Built-in Functions** | `len`, `head`, `tail`, `rest`, `push`, `pop`, `print` |
 | **Error Handling** | Descriptive runtime error propagation |
 
+For the full language specification, see the [Language Reference](docs/LANGUAGE.md).
+
 ---
 
 ## Quick Start
