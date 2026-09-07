@@ -12,6 +12,19 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CodeRouteImport } from './routes/code'
 import { Route as DocsRouteImport } from './routes/docs'
+import { Route as DocsIndexRouteImport } from './routes/docs/index'
+import { Route as DocsBuiltInFunctionsRouteImport } from './routes/docs/built-in-functions'
+import { Route as DocsControlFlowRouteImport } from './routes/docs/control-flow'
+import { Route as DocsDataTypesRouteImport } from './routes/docs/data-types'
+import { Route as DocsDifferencesFromMonkeyRouteImport } from './routes/docs/differences-from-monkey'
+import { Route as DocsErrorHandlingRouteImport } from './routes/docs/error-handling'
+import { Route as DocsFunctionsRouteImport } from './routes/docs/functions'
+import { Route as DocsGrammarReferenceRouteImport } from './routes/docs/grammar-reference'
+import { Route as DocsKeywordsRouteImport } from './routes/docs/keywords'
+import { Route as DocsOperatorsRouteImport } from './routes/docs/operators'
+import { Route as DocsOverviewRouteImport } from './routes/docs/overview'
+import { Route as DocsReplUsageRouteImport } from './routes/docs/repl-usage'
+import { Route as DocsVariablesRouteImport } from './routes/docs/variables'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,35 +41,187 @@ const DocsRoute = DocsRouteImport.update({
   path: '/docs',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DocsIndexRoute = DocsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DocsRoute,
+} as any)
+const DocsBuiltInFunctionsRoute = DocsBuiltInFunctionsRouteImport.update({
+  id: '/built-in-functions',
+  path: '/built-in-functions',
+  getParentRoute: () => DocsRoute,
+} as any)
+const DocsControlFlowRoute = DocsControlFlowRouteImport.update({
+  id: '/control-flow',
+  path: '/control-flow',
+  getParentRoute: () => DocsRoute,
+} as any)
+const DocsDataTypesRoute = DocsDataTypesRouteImport.update({
+  id: '/data-types',
+  path: '/data-types',
+  getParentRoute: () => DocsRoute,
+} as any)
+const DocsDifferencesFromMonkeyRoute =
+  DocsDifferencesFromMonkeyRouteImport.update({
+    id: '/differences-from-monkey',
+    path: '/differences-from-monkey',
+    getParentRoute: () => DocsRoute,
+  } as any)
+const DocsErrorHandlingRoute = DocsErrorHandlingRouteImport.update({
+  id: '/error-handling',
+  path: '/error-handling',
+  getParentRoute: () => DocsRoute,
+} as any)
+const DocsFunctionsRoute = DocsFunctionsRouteImport.update({
+  id: '/functions',
+  path: '/functions',
+  getParentRoute: () => DocsRoute,
+} as any)
+const DocsGrammarReferenceRoute = DocsGrammarReferenceRouteImport.update({
+  id: '/grammar-reference',
+  path: '/grammar-reference',
+  getParentRoute: () => DocsRoute,
+} as any)
+const DocsKeywordsRoute = DocsKeywordsRouteImport.update({
+  id: '/keywords',
+  path: '/keywords',
+  getParentRoute: () => DocsRoute,
+} as any)
+const DocsOperatorsRoute = DocsOperatorsRouteImport.update({
+  id: '/operators',
+  path: '/operators',
+  getParentRoute: () => DocsRoute,
+} as any)
+const DocsOverviewRoute = DocsOverviewRouteImport.update({
+  id: '/overview',
+  path: '/overview',
+  getParentRoute: () => DocsRoute,
+} as any)
+const DocsReplUsageRoute = DocsReplUsageRouteImport.update({
+  id: '/repl-usage',
+  path: '/repl-usage',
+  getParentRoute: () => DocsRoute,
+} as any)
+const DocsVariablesRoute = DocsVariablesRouteImport.update({
+  id: '/variables',
+  path: '/variables',
+  getParentRoute: () => DocsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/code': typeof CodeRoute
-  '/docs': typeof DocsRoute
+  '/docs': typeof DocsRouteWithChildren
+  '/docs/built-in-functions': typeof DocsBuiltInFunctionsRoute
+  '/docs/control-flow': typeof DocsControlFlowRoute
+  '/docs/data-types': typeof DocsDataTypesRoute
+  '/docs/differences-from-monkey': typeof DocsDifferencesFromMonkeyRoute
+  '/docs/error-handling': typeof DocsErrorHandlingRoute
+  '/docs/functions': typeof DocsFunctionsRoute
+  '/docs/grammar-reference': typeof DocsGrammarReferenceRoute
+  '/docs/keywords': typeof DocsKeywordsRoute
+  '/docs/operators': typeof DocsOperatorsRoute
+  '/docs/overview': typeof DocsOverviewRoute
+  '/docs/repl-usage': typeof DocsReplUsageRoute
+  '/docs/variables': typeof DocsVariablesRoute
+  '/docs/': typeof DocsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/code': typeof CodeRoute
-  '/docs': typeof DocsRoute
+  '/docs/built-in-functions': typeof DocsBuiltInFunctionsRoute
+  '/docs/control-flow': typeof DocsControlFlowRoute
+  '/docs/data-types': typeof DocsDataTypesRoute
+  '/docs/differences-from-monkey': typeof DocsDifferencesFromMonkeyRoute
+  '/docs/error-handling': typeof DocsErrorHandlingRoute
+  '/docs/functions': typeof DocsFunctionsRoute
+  '/docs/grammar-reference': typeof DocsGrammarReferenceRoute
+  '/docs/keywords': typeof DocsKeywordsRoute
+  '/docs/operators': typeof DocsOperatorsRoute
+  '/docs/overview': typeof DocsOverviewRoute
+  '/docs/repl-usage': typeof DocsReplUsageRoute
+  '/docs/variables': typeof DocsVariablesRoute
+  '/docs': typeof DocsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/code': typeof CodeRoute
-  '/docs': typeof DocsRoute
+  '/docs': typeof DocsRouteWithChildren
+  '/docs/built-in-functions': typeof DocsBuiltInFunctionsRoute
+  '/docs/control-flow': typeof DocsControlFlowRoute
+  '/docs/data-types': typeof DocsDataTypesRoute
+  '/docs/differences-from-monkey': typeof DocsDifferencesFromMonkeyRoute
+  '/docs/error-handling': typeof DocsErrorHandlingRoute
+  '/docs/functions': typeof DocsFunctionsRoute
+  '/docs/grammar-reference': typeof DocsGrammarReferenceRoute
+  '/docs/keywords': typeof DocsKeywordsRoute
+  '/docs/operators': typeof DocsOperatorsRoute
+  '/docs/overview': typeof DocsOverviewRoute
+  '/docs/repl-usage': typeof DocsReplUsageRoute
+  '/docs/variables': typeof DocsVariablesRoute
+  '/docs/': typeof DocsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/code' | '/docs'
+  fullPaths:
+    | '/'
+    | '/code'
+    | '/docs'
+    | '/docs/built-in-functions'
+    | '/docs/control-flow'
+    | '/docs/data-types'
+    | '/docs/differences-from-monkey'
+    | '/docs/error-handling'
+    | '/docs/functions'
+    | '/docs/grammar-reference'
+    | '/docs/keywords'
+    | '/docs/operators'
+    | '/docs/overview'
+    | '/docs/repl-usage'
+    | '/docs/variables'
+    | '/docs/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/code' | '/docs'
-  id: '__root__' | '/' | '/code' | '/docs'
+  to:
+    | '/'
+    | '/code'
+    | '/docs/built-in-functions'
+    | '/docs/control-flow'
+    | '/docs/data-types'
+    | '/docs/differences-from-monkey'
+    | '/docs/error-handling'
+    | '/docs/functions'
+    | '/docs/grammar-reference'
+    | '/docs/keywords'
+    | '/docs/operators'
+    | '/docs/overview'
+    | '/docs/repl-usage'
+    | '/docs/variables'
+    | '/docs'
+  id:
+    | '__root__'
+    | '/'
+    | '/code'
+    | '/docs'
+    | '/docs/built-in-functions'
+    | '/docs/control-flow'
+    | '/docs/data-types'
+    | '/docs/differences-from-monkey'
+    | '/docs/error-handling'
+    | '/docs/functions'
+    | '/docs/grammar-reference'
+    | '/docs/keywords'
+    | '/docs/operators'
+    | '/docs/overview'
+    | '/docs/repl-usage'
+    | '/docs/variables'
+    | '/docs/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CodeRoute: typeof CodeRoute
-  DocsRoute: typeof DocsRoute
+  DocsRoute: typeof DocsRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -82,13 +247,138 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/docs/': {
+      id: '/docs/'
+      path: '/'
+      fullPath: '/docs/'
+      preLoaderRoute: typeof DocsIndexRouteImport
+      parentRoute: typeof DocsRoute
+    }
+    '/docs/built-in-functions': {
+      id: '/docs/built-in-functions'
+      path: '/built-in-functions'
+      fullPath: '/docs/built-in-functions'
+      preLoaderRoute: typeof DocsBuiltInFunctionsRouteImport
+      parentRoute: typeof DocsRoute
+    }
+    '/docs/control-flow': {
+      id: '/docs/control-flow'
+      path: '/control-flow'
+      fullPath: '/docs/control-flow'
+      preLoaderRoute: typeof DocsControlFlowRouteImport
+      parentRoute: typeof DocsRoute
+    }
+    '/docs/data-types': {
+      id: '/docs/data-types'
+      path: '/data-types'
+      fullPath: '/docs/data-types'
+      preLoaderRoute: typeof DocsDataTypesRouteImport
+      parentRoute: typeof DocsRoute
+    }
+    '/docs/differences-from-monkey': {
+      id: '/docs/differences-from-monkey'
+      path: '/differences-from-monkey'
+      fullPath: '/docs/differences-from-monkey'
+      preLoaderRoute: typeof DocsDifferencesFromMonkeyRouteImport
+      parentRoute: typeof DocsRoute
+    }
+    '/docs/error-handling': {
+      id: '/docs/error-handling'
+      path: '/error-handling'
+      fullPath: '/docs/error-handling'
+      preLoaderRoute: typeof DocsErrorHandlingRouteImport
+      parentRoute: typeof DocsRoute
+    }
+    '/docs/functions': {
+      id: '/docs/functions'
+      path: '/functions'
+      fullPath: '/docs/functions'
+      preLoaderRoute: typeof DocsFunctionsRouteImport
+      parentRoute: typeof DocsRoute
+    }
+    '/docs/grammar-reference': {
+      id: '/docs/grammar-reference'
+      path: '/grammar-reference'
+      fullPath: '/docs/grammar-reference'
+      preLoaderRoute: typeof DocsGrammarReferenceRouteImport
+      parentRoute: typeof DocsRoute
+    }
+    '/docs/keywords': {
+      id: '/docs/keywords'
+      path: '/keywords'
+      fullPath: '/docs/keywords'
+      preLoaderRoute: typeof DocsKeywordsRouteImport
+      parentRoute: typeof DocsRoute
+    }
+    '/docs/operators': {
+      id: '/docs/operators'
+      path: '/operators'
+      fullPath: '/docs/operators'
+      preLoaderRoute: typeof DocsOperatorsRouteImport
+      parentRoute: typeof DocsRoute
+    }
+    '/docs/overview': {
+      id: '/docs/overview'
+      path: '/overview'
+      fullPath: '/docs/overview'
+      preLoaderRoute: typeof DocsOverviewRouteImport
+      parentRoute: typeof DocsRoute
+    }
+    '/docs/repl-usage': {
+      id: '/docs/repl-usage'
+      path: '/repl-usage'
+      fullPath: '/docs/repl-usage'
+      preLoaderRoute: typeof DocsReplUsageRouteImport
+      parentRoute: typeof DocsRoute
+    }
+    '/docs/variables': {
+      id: '/docs/variables'
+      path: '/variables'
+      fullPath: '/docs/variables'
+      preLoaderRoute: typeof DocsVariablesRouteImport
+      parentRoute: typeof DocsRoute
+    }
   }
 }
+
+interface DocsRouteChildren {
+  DocsBuiltInFunctionsRoute: typeof DocsBuiltInFunctionsRoute
+  DocsControlFlowRoute: typeof DocsControlFlowRoute
+  DocsDataTypesRoute: typeof DocsDataTypesRoute
+  DocsDifferencesFromMonkeyRoute: typeof DocsDifferencesFromMonkeyRoute
+  DocsErrorHandlingRoute: typeof DocsErrorHandlingRoute
+  DocsFunctionsRoute: typeof DocsFunctionsRoute
+  DocsGrammarReferenceRoute: typeof DocsGrammarReferenceRoute
+  DocsKeywordsRoute: typeof DocsKeywordsRoute
+  DocsOperatorsRoute: typeof DocsOperatorsRoute
+  DocsOverviewRoute: typeof DocsOverviewRoute
+  DocsReplUsageRoute: typeof DocsReplUsageRoute
+  DocsVariablesRoute: typeof DocsVariablesRoute
+  DocsIndexRoute: typeof DocsIndexRoute
+}
+
+const DocsRouteChildren: DocsRouteChildren = {
+  DocsBuiltInFunctionsRoute: DocsBuiltInFunctionsRoute,
+  DocsControlFlowRoute: DocsControlFlowRoute,
+  DocsDataTypesRoute: DocsDataTypesRoute,
+  DocsDifferencesFromMonkeyRoute: DocsDifferencesFromMonkeyRoute,
+  DocsErrorHandlingRoute: DocsErrorHandlingRoute,
+  DocsFunctionsRoute: DocsFunctionsRoute,
+  DocsGrammarReferenceRoute: DocsGrammarReferenceRoute,
+  DocsKeywordsRoute: DocsKeywordsRoute,
+  DocsOperatorsRoute: DocsOperatorsRoute,
+  DocsOverviewRoute: DocsOverviewRoute,
+  DocsReplUsageRoute: DocsReplUsageRoute,
+  DocsVariablesRoute: DocsVariablesRoute,
+  DocsIndexRoute: DocsIndexRoute,
+}
+
+const DocsRouteWithChildren = DocsRoute._addFileChildren(DocsRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CodeRoute: CodeRoute,
-  DocsRoute: DocsRoute,
+  DocsRoute: DocsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

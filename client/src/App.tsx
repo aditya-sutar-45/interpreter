@@ -3,12 +3,10 @@ import { routeTree } from "@/routeTree.gen"
 
 const router = createRouter({
   routeTree,
-});
+})
 
 export function App() {
-  return (
-    <RouterProvider router={router} />
-  )
+  return <RouterProvider router={router} />
 }
 
 export default App

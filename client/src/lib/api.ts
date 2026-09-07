@@ -1,8 +1,8 @@
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000"
 
 export type RunCodeResponse = {
-  output: string;
-  errors?: string[];
+  output: string
+  errors?: string[]
 }
 
 export const runCode = async (input: string) => {
@@ -12,13 +12,13 @@ export const runCode = async (input: string) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ code: input }),
-  });
+  })
 
   if (!response.ok) {
-    throw new Error(`Error: ${response.status} ${response.statusText}`);
+    throw new Error(`Error: ${response.status} ${response.statusText}`)
   }
 
-  const output = await response.json() as RunCodeResponse;
+  const output = (await response.json()) as RunCodeResponse
 
-  return output;
+  return output
 }
