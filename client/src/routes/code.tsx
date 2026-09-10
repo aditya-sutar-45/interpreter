@@ -14,16 +14,20 @@ export const Route = createFileRoute("/code")({
 })
 
 function RouteComponent() {
-  const [code, setCode] = useState("// write your code here")
+  const [code, setCode] = useState("# write your code here")
   const [output, setOutput] = useState<RunCodeResponse>({ output: "" })
+  const [loading, setLoading] = useState<boolean>(false)
 
   const handleCodeSubmit = async () => {
+    setLoading(true)
     try {
       const output = await runCode(code)
       setOutput(output)
       console.log(output)
     } catch (err) {
       console.error("Error running code:", err)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -41,7 +45,11 @@ function RouteComponent() {
         </ResizablePanel>
         <ResizableHandle withHandle />
         <ResizablePanel defaultSize="40%">
-          <Output handleCodeSubmit={handleCodeSubmit} output={output} />
+          <Output
+            handleCodeSubmit={handleCodeSubmit}
+            output={output}
+            loading={loading}
+          />
         </ResizablePanel>
       </ResizablePanelGroup>
     </div>

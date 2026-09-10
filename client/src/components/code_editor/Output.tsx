@@ -3,20 +3,23 @@ import { Button } from "@/components/ui/button"
 import { Link } from "@tanstack/react-router"
 import { SquareArrowOutUpRight } from "lucide-react"
 import type { RunCodeResponse } from "@/lib/api"
+import { Spinner } from "../ui/spinner"
 
 function Output({
   handleCodeSubmit,
   output,
+  loading,
 }: {
   handleCodeSubmit: () => Promise<void>
   output: RunCodeResponse
+  loading: boolean
 }) {
   return (
     <div className="h-full w-full p-2">
       <div className="flex h-[8%] w-full items-center justify-between">
         <h1 className="ml-2 font-heading">Output</h1>
-        <Button variant="outline" onClick={handleCodeSubmit}>
-          Run Code
+        <Button variant="outline" onClick={handleCodeSubmit} disabled={loading}>
+          {loading ? <Spinner /> : "Run Code"}
         </Button>
       </div>
       <Separator />
