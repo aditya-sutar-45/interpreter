@@ -30,7 +30,8 @@ if (5 < 10) {
 "aditya"
 "aditya_sutar"
 [1, 2];
-{"hello" : "world"}
+#this is a comment;
+{"hello" : "world"} #this is also a comment
 `
 
 	tests := []struct {

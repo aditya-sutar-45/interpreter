@@ -19,8 +19,18 @@ func New(input string) *Lexer {
 func (l *Lexer) NextToken() token.Token {
 	var tok token.Token
 
-	// skip whitespace
-	l.skipWhitespace()
+	for {
+		// skip whitespace
+		l.skipWhitespace()
+
+		// skip comments
+		if l.ch == '#' {
+			l.skipComment()
+			continue
+		}
+
+		break
+	}
 
 	switch l.ch {
 	case '=':
@@ -122,6 +132,12 @@ func (l *Lexer) readChar() {
 
 func (l *Lexer) skipWhitespace() {
 	for l.ch == ' ' || l.ch == '\t' || l.ch == '\n' || l.ch == '\r' {
+		l.readChar()
+	}
+}
+
+func (l *Lexer) skipComment() {
+	for l.ch != '\n' && l.ch != 0 {
 		l.readChar()
 	}
 }
