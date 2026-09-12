@@ -35,7 +35,7 @@ function Output({
         </div>
       </div>
       <div className="m-2 h-[5%] text-sm">
-        <Link to="/docs">
+        <Link to="/docs/overview">
           <Button variant="link">
             Visit docs to learn more
             <SquareArrowOutUpRight className="ml-1" />
